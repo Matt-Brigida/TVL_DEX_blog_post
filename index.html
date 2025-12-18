@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-17 Wed 22:22 -->
+<!-- 2025-12-17 Wed 22:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Total-Value-Locked and Active Developers</title>
+<title>Alpha Found: Total-Value-Locked and DEX Volume</title>
 <meta name="author" content="Matt Brigida" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -246,13 +246,13 @@ $(function() {    $('.note').before("<p class='admonition-title note'>Note</p>")
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Total-Value-Locked and Active Developers</h1>
+<h1 class="title">Alpha Found: Total-Value-Locked and DEX Volume</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org329eb9d">1. TVL and DEX Volume Multisort Portfolios</a></li>
-<li><a href="#org2920c34">2. Joint Tests for Significant Alpha</a></li>
+<li><a href="#orgb73b3a0">1. TVL and DEX Volume Multisort Portfolios</a></li>
+<li><a href="#org05dee83">2. Joint Tests for Significant Alpha</a></li>
 </ul>
 </div>
 </div>
@@ -267,18 +267,18 @@ There are a number of reasons to think a cryptocurrency's TVL will affect its re
 <p>
 In addition, TVL may also affect prices through traditional investment in value channels. Fama and French (2015)<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> found firms which invest more aggressively tend to earn lower returns.  Since TVL to market cap may be viewed as an investment intensity factor, there may be a similar effect in crypto.  TVL to market cap may also be a value measure which signals future growth.  Liu, Tsyvinski, and Wu (2022)<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> found evidence of a value effect in crypto using a price to new address ratio.
 </p>
-<div id="outline-container-org329eb9d" class="outline-2">
-<h2 id="org329eb9d"><span class="section-number-2">1.</span> TVL and DEX Volume Multisort Portfolios</h2>
+<div id="outline-container-orgb73b3a0" class="outline-2">
+<h2 id="orgb73b3a0"><span class="section-number-2">1.</span> TVL and DEX Volume Multisort Portfolios</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-In my tests I follow the standard Fama–French 2×3 portfolio construction, adapted to crypto. Each period I rank all eligible tokens on two characteristics measured in the prior period: total value locked (TVL) and the number of active developers (scaled by market cap). First, I split tokens into Small TVL and Big TVL groups using the median TVL. Independently, I sort tokens into three developer-activity groups — Low, Medium, and High devs — using the 30th and 70th percentiles of the developer measure. Taking the intersection of these two independent sorts gives six portfolios: Small–Low (SL), Small–Medium (SM), Small–High (SH), Big–Low (BL), Big–Medium (BM), and Big–High (BH). I then track the value-weighted returns of these six portfolios over the next period. This 2×3 design lets me see how returns vary jointly with TVL and developer activity, and then build long–short factors (e.g., high-minus-low devs controlling for TVL) to test whether these characteristics earn a risk premium.
+In my tests I follow the standard Fama–French 2×3 portfolio construction, adapted to crypto. Each period I rank all eligible tokens on two characteristics measured in the prior period: total value locked (TVL) and DEX volume (scaled by market cap). First, I split tokens into Small TVL and Big TVL groups using the median TVL. Independently, I sort tokens into three DEX-activity groups — Low, Medium, and High devs — using the 30th and 70th percentiles of the DEX measure. Taking the intersection of these two independent sorts gives six portfolios: Small–Low (SL), Small–Medium (SM), Small–High (SH), Big–Low (BL), Big–Medium (BM), and Big–High (BH). I then track the value-weighted returns of these six portfolios over the next period. This 2×3 design lets me see how returns vary jointly with TVL and DEX activity, and then build long–short factors (e.g., high-minus-low DEX controlling for TVL) to test whether these characteristics earn a risk premium.
 </p>
 </div>
-<div id="outline-container-org3d5d0e8" class="outline-3">
-<h3 id="org3d5d0e8"><span class="section-number-3">1.1.</span> TVL (size) factor: Small minus Big (SMB)</h3>
+<div id="outline-container-org99d4007" class="outline-3">
+<h3 id="org99d4007"><span class="section-number-3">1.1.</span> TVL (size) factor: Small minus Big (SMB)</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-The long-shot SMB portfolio measures whether TVL is a rewarded risk controlling for developers to market cap.
+The long-shot SMB portfolio measures whether TVL is a rewarded risk controlling for DEX volume to market cap.
 </p>
 
 <p>
@@ -307,17 +307,17 @@ The portfolio as a weekly mean return of <code>1.22</code> %, however given the 
 </p>
 
 
-<div id="orgb536afe" class="figure">
+<div id="org720db4f" class="figure">
 <p><img src="./multi_SMB.png" alt="multi_SMB.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org966b72c" class="outline-3">
-<h3 id="org966b72c"><span class="section-number-3">1.2.</span> Devs factor: High devs minus Low devs (HML), neutral to TVL</h3>
+<div id="outline-container-org0896f63" class="outline-3">
+<h3 id="org0896f63"><span class="section-number-3">1.2.</span> Devs factor: High devs minus Low devs (HML), neutral to TVL</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-This long-short portfolio is long tokens with more developers (per market cap) and short tokens with few developers, while controlling for TVL.
+This long-short portfolio is long tokens with more DEX volume (per market cap) and short tokens low DEX volume, while controlling for TVL.
 </p>
 
 <p>
@@ -346,27 +346,22 @@ The portfolio as a weekly mean return of <code>2.03</code> %, however given the 
 </p>
 
 
-<div id="orge3a347b" class="figure">
+<div id="org7604130" class="figure">
 <p><img src="./multi_HML.png" alt="multi_HML.png" />
 </p>
 </div>
-
-
-<p>
-The TVL and Developer SMB portfolio has a mean annualized return of 9.93% and a standard deviation of 35.04%.  The mean return is insignificantly different from 0.  The HML portfolio has a mean annualized return of 15.70% and a standard deviation 60.42%, though again the mean return is insignificantly different from 0.
-</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2920c34" class="outline-2">
-<h2 id="org2920c34"><span class="section-number-2">2.</span> Joint Tests for Significant Alpha</h2>
+<div id="outline-container-org05dee83" class="outline-2">
+<h2 id="org05dee83"><span class="section-number-2">2.</span> Joint Tests for Significant Alpha</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-To test whether my TVL–developer portfolios earn any abnormal returns (alpha), I use a standard linear factor model and Hansen’s J-statistic<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> for a joint alpha test.
+To test whether my TVL–DEX portfolios earn any abnormal returns (alpha), I use a standard linear factor model and Hansen’s J-statistic<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> for a joint alpha test.
 </p>
 
 <p>
-I start from a 2×3 sort on lagged total value locked (TVL) and active developers (both scaled by market cap), which gives me two test portfolios. For each portfolio, I ask whether its average excess return can be explained by two simple crypto risk factors:
+I start from a 2×3 sort on lagged total value locked (TVL) and DEX volume (both scaled by market cap), which gives me two test portfolios. For each portfolio, I ask whether its average excess return can be explained by two simple crypto risk factors:
 	​
 </p>
 <ul class="org-ul">
@@ -394,17 +389,17 @@ and
 and then test whether \(\alpha_1\) and \(\alpha_2\) are jointly equal to 0 via Hansen's J-Statistic.
 </p>
 </div>
-<div id="outline-container-orgfbba4c9" class="outline-3">
-<h3 id="orgfbba4c9"><span class="section-number-3">2.1.</span> Results</h3>
+<div id="outline-container-org3656dbe" class="outline-3">
+<h3 id="org3656dbe"><span class="section-number-3">2.1.</span> Results</h3>
 <div class="outline-text-3" id="text-2-1">
-<pre class="example" id="org5f38de6">
+<pre class="example" id="orgfbf3237">
                       TradedFactorModel Estimation Summary                      
 ================================================================================
 No. Test Portfolios:                  2   R-squared:                      0.0604
 No. Factors:                          2   J-statistic:                    7.4332
 No. Observations:                   124   P-value                         0.0243
 Date:                  Wed, Dec 17 2025   Distribution:                  chi2(2)
-Time:                          22:22:07                                         
+Time:                          22:33:39                                         
 Cov. Estimator:                  kernel                                         
                                                                                 
                                  Risk Premia Estimates                                  
@@ -421,14 +416,14 @@ See full_summary for complete results
 </pre>
 
 <p>
-See the results above, estimated via the <code>Traded Factor Model</code> method from the <code>LinearModels</code> python package.  The J-Statistic (<code>7.43</code>) is a test of whether the alpha coefficients are jointly equal to 0 (the null hypothesis). We can't reject the null with the statistics p-value of <code>0.02</code>.  We therefore conclude that portfolios sorted both on TVL to market cap and the scaled number of developers does not generate alpha.   That is, these portfolio returns can be replicated by appropriate weights on the crypto market and SMB factor portfolios.
+See the results above, estimated via the <code>Traded Factor Model</code> method from the <code>LinearModels</code> python package.  The J-Statistic (<code>7.43</code>) is a test of whether the alpha coefficients are jointly equal to 0 (the null hypothesis). We reject the null with the statistics p-value of <code>0.02</code>.  We therefore have evidence that portfolios sorted both on TVL to market cap and the scaled DEX volume generates alpha.
 </p>
 </div>
-<div id="outline-container-org6ccaafb" class="outline-4">
-<h4 id="org6ccaafb"><span class="section-number-4">2.1.1.</span> Annualized Alpha Coefficients</h4>
+<div id="outline-container-org73ca7a7" class="outline-4">
+<h4 id="org73ca7a7"><span class="section-number-4">2.1.1.</span> Annualized Alpha Coefficients</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
-The SMB and HML portfolios generate an alpha of <code>95.16</code> %, and <code>189.28</code> %, respectively.  However, given large standard errors, these alphas are insignificantly different from 0.
+The SMB and HML portfolios generate an alpha of <code>95.16</code> %, and <code>189.28</code> %, respectively.  These alphas are positive and significant at the 1% level.
 </p>
 
 <pre class="example">
@@ -465,7 +460,7 @@ Hansen, Lars Peter (1982), "Large Sample Properties of Generalized Method of Mom
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida</p>
-<p class="date">Created: 2025-12-17 Wed 22:22</p>
+<p class="date">Created: 2025-12-17 Wed 22:33</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
