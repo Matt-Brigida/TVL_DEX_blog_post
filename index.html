@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-01-19 Mon 20:58 -->
+<!-- 2026-01-19 Mon 21:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing for Alpha in TVL and DEX Volume Multisort Portfolios</title>
@@ -251,43 +251,35 @@ $(function() {    $('.note').before("<p class='admonition-title note'>Note</p>")
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org170bbc8">1. TVL and DEX Volume Multisort Portfolios</a></li>
-<li><a href="#org73f3427">2. Tests for Significant Alpha</a></li>
+<li><a href="#org9d6f775">1. TVL and DEX Volume Multisort Portfolios</a></li>
+<li><a href="#org283e878">2. Tests for Significant Alpha</a></li>
 </ul>
 </div>
 </div>
 <p>
-Using TVL sorted portfolios, Brigida (2025)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> found no evidence that TVL can generate alpha.  Returns on TVL-sorted portfolios are linear functions of crypto market returns.  These results also imply TVL-sorted portfolios do not proxy an investment intensity or value effect.  In a follw on series of blog posts I am testing whether portfolios sorted on both TVL and other factors can generate alpha.  Specifically, I test the multisort portfolios for significant alpha in regression on excess crypto market returns, and a crypto size factor.
+Using TVL sorted portfolios, Brigida (2025)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> found no evidence that TVL can generate alpha.  Returns on TVL-sorted portfolios are linear functions of crypto market returns.  These results also imply TVL-sorted portfolios do not proxy an investment intensity or value effect.  In a follow on series of blog posts I am testing whether portfolios sorted on both TVL and other factors can generate alpha.  Specifically, I test the multisort portfolios for significant alpha in regression on excess crypto market returns, and a crypto size factor.
 </p>
 
 <p>
-In this notebook I test portfolios sorted on both TVL and DEX volume (both scaled by market cap), and find evidence that sorting on these measures generates alpha.  This is the first TVL-related sort to do so.  This is evidence that these portfolio returns are not due to common crypto market and small-minus-big factors, but instead represent a unique source of returns.
+In this notebook I test portfolios sorted on both TVL and DEX volume (both scaled by market cap).  I initially find that the mean return on a DEX and TVL sorted portfolio is significantly positive.  Moreover, the alpha in a linear regression of the portfolio returns on a crypto two-factor model is positive and significant.  However, once controlling for residual serial correlation the alpha becomes insignificant, so ultimately I do not find evidence that sorting on these measures generates alpha.  However, this may be due to the sample period, and despite the following results I think DEX volume controlling for TVL levels may be a promising approach to generating alpha in crypto markets.
 </p>
-
-<p>
-There are a number of reasons to think a cryptocurrency's TVL will affect its returns.  First, because total-value-locked (TVL) measures investment in a cryptocurrency's ecosystem, it is often viewed as a measure of trust.  Greater trust, it is thought, should increase the cryptocurrency's price.
-</p>
-
-<p>
-In addition, TVL may also affect prices through traditional investment in value channels. Fama and French (2015)<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> found firms which invest more aggressively tend to earn lower returns.  Since TVL to market cap may be viewed as an investment intensity factor, there may be a similar effect in crypto.  TVL to market cap may also be a value measure which signals future growth.  Liu, Tsyvinski, and Wu (2022)<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> found evidence of a value effect in crypto using a price to new address ratio.
-</p>
-<div id="outline-container-org170bbc8" class="outline-2">
-<h2 id="org170bbc8"><span class="section-number-2">1.</span> TVL and DEX Volume Multisort Portfolios</h2>
+<div id="outline-container-org9d6f775" class="outline-2">
+<h2 id="org9d6f775"><span class="section-number-2">1.</span> TVL and DEX Volume Multisort Portfolios</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 In my tests I follow the standard Fama–French 2×3 portfolio construction, adapted to crypto. Each period I rank all eligible tokens on two characteristics measured in the prior period: total value locked (TVL) and DEX volume (scaled by market cap). First, I split tokens into Small TVL and Big TVL groups using the median TVL. Independently, I sort tokens into three DEX-activity groups — Low, Medium, and High DEX volume — using the 30th and 70th percentiles of the DEX measure. Taking the intersection of these two independent sorts gives six portfolios: Small–Low (SL), Small–Medium (SM), Small–High (SH), Big–Low (BL), Big–Medium (BM), and Big–High (BH). I then track the value-weighted returns of these six portfolios over the next period. This 2×3 design lets me see how returns vary jointly with TVL and DEX activity, and then build long–short factors (e.g., high-minus-low DEX controlling for TVL) to test whether these characteristics earn a risk premium.
 </p>
 </div>
-<div id="outline-container-orga3ffcb1" class="outline-3">
-<h3 id="orga3ffcb1"><span class="section-number-3">1.1.</span> Data</h3>
+<div id="outline-container-orgbdbbc2e" class="outline-3">
+<h3 id="orgbdbbc2e"><span class="section-number-3">1.1.</span> Data</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Our data is sampled at the weekly frequency, and ranges from 1/3/2022 to 7/28/2025.  We include all coins that were in the top 100 over any part of the sample period, though we exclude Bitcoin and all stablecoins.  Returns are quoted in percentage points.
 </p>
 </div>
 </div>
-<div id="outline-container-org8cc0c9a" class="outline-3">
-<h3 id="org8cc0c9a"><span class="section-number-3">1.2.</span> TVL (size) factor: Small minus Big TVL (\(SMB_{TVL}\))</h3>
+<div id="outline-container-org796c133" class="outline-3">
+<h3 id="org796c133"><span class="section-number-3">1.2.</span> TVL (size) factor: Small minus Big TVL (\(SMB_{TVL}\))</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The long-short \(SMB_{TVL}\) portfolio measures whether TVL is a rewarded risk controlling for DEX volume to market cap.
@@ -326,14 +318,14 @@ TtestResult(statistic=array([1.00698739]), pvalue=array([0.31582595]), df=array(
 
 
 
-<div id="orgbcd2d1e" class="figure">
+<div id="orgd167c43" class="figure">
 <p><img src="./multi_SMB.png" alt="multi_SMB.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb65a393" class="outline-3">
-<h3 id="orgb65a393"><span class="section-number-3">1.3.</span> DEX factor: High DEX Volume minus Low DEX Volume (\(HML_{DEX}\)), neutral to TVL</h3>
+<div id="outline-container-org696e5b4" class="outline-3">
+<h3 id="org696e5b4"><span class="section-number-3">1.3.</span> DEX factor: High DEX Volume minus Low DEX Volume (\(HML_{DEX}\)), neutral to TVL</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 This long-short portfolio is long tokens with more DEX volume (per market cap) and short tokens low DEX volume, while controlling for TVL.
@@ -370,18 +362,18 @@ TtestResult(statistic=array([2.17655566]), pvalue=array([0.03133462]), df=array(
 
 
 
-<div id="org911c67d" class="figure">
+<div id="org4674356" class="figure">
 <p><img src="./multi_HML.png" alt="multi_HML.png" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org73f3427" class="outline-2">
-<h2 id="org73f3427"><span class="section-number-2">2.</span> Tests for Significant Alpha</h2>
+<div id="outline-container-org283e878" class="outline-2">
+<h2 id="org283e878"><span class="section-number-2">2.</span> Tests for Significant Alpha</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-To test whether my TVL–DEX portfolios earn any abnormal returns (alpha), I use a t-test on the intercept of a standard linear factor model and Hansen’s J-statistic<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> for a joint alpha test.
+To test whether my TVL–DEX portfolios earn any abnormal returns (alpha), I use a t-test on the intercept of a standard linear factor model and Hansen’s J-statistic<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> for a joint alpha test.
 </p>
 
 <p>
@@ -413,25 +405,25 @@ and
 and then test whether \(\alpha_1\) and \(\alpha_2\) are individually and jointly equal to 0 via t-tests and Hansen's J-Statistic.
 </p>
 </div>
-<div id="outline-container-orgcf59d75" class="outline-3">
-<h3 id="orgcf59d75"><span class="section-number-3">2.1.</span> Results</h3>
+<div id="outline-container-org9012c17" class="outline-3">
+<h3 id="org9012c17"><span class="section-number-3">2.1.</span> Results</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-orgf516eec" class="outline-4">
-<h4 id="orgf516eec"><span class="section-number-4">2.1.1.</span> Single Portfolio Tests</h4>
+<div id="outline-container-orgb7433d8" class="outline-4">
+<h4 id="orgb7433d8"><span class="section-number-4">2.1.1.</span> Single Portfolio Tests</h4>
 <div class="outline-text-4" id="text-2-1-1">
 </div>
 <ol class="org-ol">
-<li><a id="org5e13af1"></a>\(TVL_{SMB}\) Portfolio<br />
+<li><a id="org2d2fc46"></a>\(TVL_{SMB}\) Portfolio<br />
 <div class="outline-text-5" id="text-2-1-1-1">
-<pre class="example" id="orgb131e72">
+<pre class="example" id="orgb8b49b5">
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:              multi_SMB   R-squared:                       0.013
 Model:                            OLS   Adj. R-squared:                 -0.003
 Method:                 Least Squares   F-statistic:                    0.4733
 Date:                Mon, 19 Jan 2026   Prob (F-statistic):              0.624
-Time:                        20:58:49   Log-Likelihood:                -422.93
+Time:                        21:09:30   Log-Likelihood:                -422.93
 No. Observations:                 130   AIC:                             851.9
 Df Residuals:                     127   BIC:                             860.5
 Df Model:                           2                                         
@@ -454,20 +446,20 @@ Notes:
 </pre>
 </div>
 </li>
-<li><a id="orgb57fb43"></a>\(DEX_{HML}\) Portfolio<br />
+<li><a id="orga3fd322"></a>\(DEX_{HML}\) Portfolio<br />
 <div class="outline-text-5" id="text-2-1-1-2">
 <p>
 Regressing HML portfolio returns on our two factors yields an weekly alpha of 2.15%, however this alpha is insignificant. Using conventional (nonrobust) OLS standard errors, the alpha is marginally significant (10% level). However, when we compute Newey–West (HAC) standard errors to account for heteroskedasticity and autocorrelation in weekly returns, the alpha is no longer statistically significant. Accordingly, the evidence for abnormal returns is not robust to standard time-series inference.
 </p>
 
-<pre class="example" id="org8fe9cdc">
+<pre class="example" id="org1106394">
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:              multi_HML   R-squared:                       0.016
 Model:                            OLS   Adj. R-squared:                  0.001
 Method:                 Least Squares   F-statistic:                    0.8613
 Date:                Mon, 19 Jan 2026   Prob (F-statistic):              0.425
-Time:                        20:58:49   Log-Likelihood:                -477.84
+Time:                        21:09:30   Log-Likelihood:                -477.84
 No. Observations:                 130   AIC:                             961.7
 Df Residuals:                     127   BIC:                             970.3
 Df Model:                           2                                         
@@ -492,17 +484,17 @@ Notes:
 </li>
 </ol>
 </div>
-<div id="outline-container-orgcbeedd4" class="outline-4">
-<h4 id="orgcbeedd4"><span class="section-number-4">2.1.2.</span> Joint Test</h4>
+<div id="outline-container-org5a9dd18" class="outline-4">
+<h4 id="org5a9dd18"><span class="section-number-4">2.1.2.</span> Joint Test</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<pre class="example" id="orgfb9fbc2">
+<pre class="example" id="org3917cf0">
                       TradedFactorModel Estimation Summary                      
 ================================================================================
 No. Test Portfolios:                  2   R-squared:                      0.0154
 No. Factors:                          2   J-statistic:                    1.6169
 No. Observations:                   130   P-value                         0.4456
 Date:                  Mon, Jan 19 2026   Distribution:                  chi2(2)
-Time:                          20:58:49                                         
+Time:                          21:09:30                                         
 Cov. Estimator:                  kernel                                         
                                                                                 
                                  Risk Premia Estimates                                  
@@ -534,14 +526,6 @@ Brigida, Matthew (2025), "The surprising irrelevance of total-value-locked on cr
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-Fama, E. F., &amp; French, K. R. (2015). A five-factor asset pricing model. Journal of financial economics, 116(1), 1-22. 
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-Liu, Y., Tsyvinski, A., &amp; Wu, X. (2022). Common risk factors in cryptocurrency. The Journal of Finance, 77(2), 1133-1177. 
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 Hansen, Lars Peter (1982), "Large Sample Properties of Generalized Method of Moments Estimators," <i>Econometrica</i>. 
 </p></div></div>
 
@@ -550,7 +534,7 @@ Hansen, Lars Peter (1982), "Large Sample Properties of Generalized Method of Mom
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida</p>
-<p class="date">Created: 2026-01-19 Mon 20:58</p>
+<p class="date">Created: 2026-01-19 Mon 21:09</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
