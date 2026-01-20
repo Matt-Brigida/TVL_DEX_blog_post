@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-01-19 Mon 18:16 -->
+<!-- 2026-01-19 Mon 19:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Alpha Found: DEX Sort Controlling for TVL</title>
+<title>&lrm;</title>
 <meta name="author" content="Matt Brigida" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -246,13 +246,12 @@ $(function() {    $('.note').before("<p class='admonition-title note'>Note</p>")
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Alpha Found: DEX Sort Controlling for TVL</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org23b2a46">1. TVL and DEX Volume Multisort Portfolios</a></li>
-<li><a href="#org8cd1ce4">2. Tests for Significant Alpha</a></li>
+<li><a href="#org85d6b9a">1. TVL and DEX Volume Multisort Portfolios</a></li>
+<li><a href="#orgf807def">2. Tests for Significant Alpha</a></li>
 </ul>
 </div>
 </div>
@@ -271,30 +270,30 @@ There are a number of reasons to think a cryptocurrency's TVL will affect its re
 <p>
 In addition, TVL may also affect prices through traditional investment in value channels. Fama and French (2015)<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> found firms which invest more aggressively tend to earn lower returns.  Since TVL to market cap may be viewed as an investment intensity factor, there may be a similar effect in crypto.  TVL to market cap may also be a value measure which signals future growth.  Liu, Tsyvinski, and Wu (2022)<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> found evidence of a value effect in crypto using a price to new address ratio.
 </p>
-<div id="outline-container-org23b2a46" class="outline-2">
-<h2 id="org23b2a46"><span class="section-number-2">1.</span> TVL and DEX Volume Multisort Portfolios</h2>
+<div id="outline-container-org85d6b9a" class="outline-2">
+<h2 id="org85d6b9a"><span class="section-number-2">1.</span> TVL and DEX Volume Multisort Portfolios</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-In my tests I follow the standard Fama–French 2×3 portfolio construction, adapted to crypto. Each period I rank all eligible tokens on two characteristics measured in the prior period: total value locked (TVL) and DEX volume (scaled by market cap). First, I split tokens into Small TVL and Big TVL groups using the median TVL. Independently, I sort tokens into three DEX-activity groups — Low, Medium, and High devs — using the 30th and 70th percentiles of the DEX measure. Taking the intersection of these two independent sorts gives six portfolios: Small–Low (SL), Small–Medium (SM), Small–High (SH), Big–Low (BL), Big–Medium (BM), and Big–High (BH). I then track the value-weighted returns of these six portfolios over the next period. This 2×3 design lets me see how returns vary jointly with TVL and DEX activity, and then build long–short factors (e.g., high-minus-low DEX controlling for TVL) to test whether these characteristics earn a risk premium.
+In my tests I follow the standard Fama–French 2×3 portfolio construction, adapted to crypto. Each period I rank all eligible tokens on two characteristics measured in the prior period: total value locked (TVL) and DEX volume (scaled by market cap). First, I split tokens into Small TVL and Big TVL groups using the median TVL. Independently, I sort tokens into three DEX-activity groups — Low, Medium, and High DEX volume — using the 30th and 70th percentiles of the DEX measure. Taking the intersection of these two independent sorts gives six portfolios: Small–Low (SL), Small–Medium (SM), Small–High (SH), Big–Low (BL), Big–Medium (BM), and Big–High (BH). I then track the value-weighted returns of these six portfolios over the next period. This 2×3 design lets me see how returns vary jointly with TVL and DEX activity, and then build long–short factors (e.g., high-minus-low DEX controlling for TVL) to test whether these characteristics earn a risk premium.
 </p>
 </div>
-<div id="outline-container-orgbfe1d8d" class="outline-3">
-<h3 id="orgbfe1d8d"><span class="section-number-3">1.1.</span> Data</h3>
+<div id="outline-container-org1829af7" class="outline-3">
+<h3 id="org1829af7"><span class="section-number-3">1.1.</span> Data</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Our data is sampled at the weekly frequency, and ranges from 1/3/2022 to 7/28/2025.  We include all coins that were in the top 100 over any part of the sample period, though we exclude Bitcoin and all stablecoins.  Returns are quoted in percentage points.
 </p>
 </div>
 </div>
-<div id="outline-container-org74056f1" class="outline-3">
-<h3 id="org74056f1"><span class="section-number-3">1.2.</span> TVL (size) factor: Small minus Big TVL (\(SMB_{TVL}\))</h3>
+<div id="outline-container-org1047ab5" class="outline-3">
+<h3 id="org1047ab5"><span class="section-number-3">1.2.</span> TVL (size) factor: Small minus Big TVL (\(SMB_{TVL}\))</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The long-short \(SMB_{TVL}\) portfolio measures whether TVL is a rewarded risk controlling for DEX volume to market cap.
 </p>
 
 <p>
-\[\text{SMB}_{{TVL}_t} = \frac{1}{3}\bigl(R_{SL,t} + R_{SM,t} + R_{SH,t}\bigr) - \frac{1}{3}\bigl(R_{BL,t} + R_{BM,t} + R_{BH,t}\bigr)\]
+\[\text{TVL}_{{SMB}_t} = \frac{1}{3}\bigl(R_{SL,t} + R_{SM,t} + R_{SH,t}\bigr) - \frac{1}{3}\bigl(R_{BL,t} + R_{BM,t} + R_{BH,t}\bigr)\]
 </p>
 
 <p>
@@ -326,21 +325,21 @@ TtestResult(statistic=array([1.00698739]), pvalue=array([0.31582595]), df=array(
 
 
 
-<div id="org9edc0e2" class="figure">
+<div id="orgdf19adb" class="figure">
 <p><img src="./multi_SMB.png" alt="multi_SMB.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf6bd8f7" class="outline-3">
-<h3 id="orgf6bd8f7"><span class="section-number-3">1.3.</span> DEX factor: High DEX Volume minus Low DEX Volume (\(HML_{DEX}\)), neutral to TVL</h3>
+<div id="outline-container-org3597158" class="outline-3">
+<h3 id="org3597158"><span class="section-number-3">1.3.</span> DEX factor: High DEX Volume minus Low DEX Volume (\(HML_{DEX}\)), neutral to TVL</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 This long-short portfolio is long tokens with more DEX volume (per market cap) and short tokens low DEX volume, while controlling for TVL.
 </p>
 
 <p>
-\[\text{HML}_{{DEX}_t} = \frac{1}{2}\bigl(R_{SH,t} + R_{BH,t}\bigr) - \frac{1}{2}\bigl(R_{SL,t} + R_{BL,t}\bigr)\]
+\[\text{DEX}_{{HML}_t} = \frac{1}{2}\bigl(R_{SH,t} + R_{BH,t}\bigr) - \frac{1}{2}\bigl(R_{SL,t} + R_{BL,t}\bigr)\]
 </p>
 
 <p>
@@ -370,15 +369,15 @@ TtestResult(statistic=array([2.17655566]), pvalue=array([0.03133462]), df=array(
 
 
 
-<div id="org5b1becb" class="figure">
+<div id="org5fec7cf" class="figure">
 <p><img src="./multi_HML.png" alt="multi_HML.png" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org8cd1ce4" class="outline-2">
-<h2 id="org8cd1ce4"><span class="section-number-2">2.</span> Tests for Significant Alpha</h2>
+<div id="outline-container-orgf807def" class="outline-2">
+<h2 id="orgf807def"><span class="section-number-2">2.</span> Tests for Significant Alpha</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 To test whether my TVL–DEX portfolios earn any abnormal returns (alpha), I use a t-test on the intercept of a standard linear factor model and Hansen’s J-statistic<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> for a joint alpha test.
@@ -398,7 +397,7 @@ That is, I estimate both:
 </p>
 
 <p>
-\(\text{SMB}_{{TVL}_t} = \alpha_1 + \beta_{M,1}\bigl(R_{M_t} - R_{F_t}\bigr) + \beta_{S,1} Market\ Cap\ SMB_t + \epsilon_t\)
+\(\text{TVL}_{{SMB}_t} = \alpha_1 + \beta_{M,1}\bigl(R_{M_t} - R_{F_t}\bigr) + \beta_{S,1} Market\ Cap\ SMB_t + \epsilon_t\)
 </p>
 
 <p>
@@ -406,42 +405,42 @@ and
 </p>
 
 <p>
-\(\text{HML}_{{DEX}_t} = \alpha_2 + \beta_{M,2}\bigl(R_{M_t} - R_{F_t}\bigr) + \beta_{S,2} Market\ Cap\ SMB_t + \epsilon_t\)
+\(\text{DEX}_{{HML}_t} = \alpha_2 + \beta_{M,2}\bigl(R_{M_t} - R_{F_t}\bigr) + \beta_{S,2} Market\ Cap\ SMB_t + \epsilon_t\)
 </p>
 
 <p>
 and then test whether \(\alpha_1\) and \(\alpha_2\) are individually and jointly equal to 0 via t-tests and Hansen's J-Statistic.
 </p>
 </div>
-<div id="outline-container-org3b43f78" class="outline-3">
-<h3 id="org3b43f78"><span class="section-number-3">2.1.</span> Results</h3>
+<div id="outline-container-org1446b28" class="outline-3">
+<h3 id="org1446b28"><span class="section-number-3">2.1.</span> Results</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org0885a39" class="outline-4">
-<h4 id="org0885a39"><span class="section-number-4">2.1.1.</span> Single Portfolio Tests</h4>
+<div id="outline-container-org22124a8" class="outline-4">
+<h4 id="org22124a8"><span class="section-number-4">2.1.1.</span> Single Portfolio Tests</h4>
 <div class="outline-text-4" id="text-2-1-1">
 </div>
 <ol class="org-ol">
-<li><a id="org2ffd18c"></a>SMB Portfolio<br />
+<li><a id="org7b45229"></a>\(TVL_{SMB}\) Portfolio<br />
 <div class="outline-text-5" id="text-2-1-1-1">
-<pre class="example" id="orga77e523">
+<pre class="example" id="org54ee77a">
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:              multi_SMB   R-squared:                       0.013
 Model:                            OLS   Adj. R-squared:                 -0.003
-Method:                 Least Squares   F-statistic:                    0.8373
-Date:                Mon, 19 Jan 2026   Prob (F-statistic):              0.435
-Time:                        18:16:24   Log-Likelihood:                -422.93
+Method:                 Least Squares   F-statistic:                    0.4733
+Date:                Mon, 19 Jan 2026   Prob (F-statistic):              0.624
+Time:                        19:11:58   Log-Likelihood:                -422.93
 No. Observations:                 130   AIC:                             851.9
 Df Residuals:                     127   BIC:                             860.5
 Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
+Covariance Type:                  HAC                                         
 ========================================================================================
-                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+                           coef    std err          z      P&gt;|z|      [0.025      0.975]
 ----------------------------------------------------------------------------------------
-Intercept                1.2985      0.807      1.609      0.110      -0.298       2.896
-excess_crypto_market     9.8127      7.678      1.278      0.204      -5.381      25.006
-single_smb_factor       -0.0049      0.040     -0.122      0.903      -0.084       0.074
+Intercept                1.2985      1.134      1.145      0.252      -0.924       3.522
+excess_crypto_market     9.8127     10.379      0.945      0.344     -10.530      30.155
+single_smb_factor       -0.0049      0.039     -0.126      0.900      -0.081       0.071
 ==============================================================================
 Omnibus:                       38.279   Durbin-Watson:                   1.738
 Prob(Omnibus):                  0.000   Jarque-Bera (JB):              200.994
@@ -450,34 +449,34 @@ Kurtosis:                       8.855   Cond. No.                         193.
 ==============================================================================
 
 Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[1] Standard Errors are heteroscedasticity and autocorrelation robust (HAC) using 4 lags and without small sample correction
 </pre>
 </div>
 </li>
-<li><a id="orgd39b9e0"></a>HML Portfolio<br />
+<li><a id="org39fb1d6"></a>\(DEX_{HML}\) Portfolio<br />
 <div class="outline-text-5" id="text-2-1-1-2">
 <p>
-Regressing HML portfolio returns on our two factors yields an weekly alpha of 2.15%, which is significant at the 10% level.
+Regressing HML portfolio returns on our two factors yields an weekly alpha of 2.15%, however this alpha is insignificant. Using conventional (nonrobust) OLS standard errors, the alpha is marginally significant (10% level). However, when we compute Newey–West (HAC) standard errors to account for heteroskedasticity and autocorrelation in weekly returns, the alpha is no longer statistically significant. Accordingly, the evidence for abnormal returns is not robust to standard time-series inference.
 </p>
 
-<pre class="example" id="org0af28aa">
+<pre class="example" id="orgd37e589">
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:              multi_HML   R-squared:                       0.016
 Model:                            OLS   Adj. R-squared:                  0.001
-Method:                 Least Squares   F-statistic:                     1.062
-Date:                Mon, 19 Jan 2026   Prob (F-statistic):              0.349
-Time:                        18:16:24   Log-Likelihood:                -477.84
+Method:                 Least Squares   F-statistic:                    0.8613
+Date:                Mon, 19 Jan 2026   Prob (F-statistic):              0.425
+Time:                        19:11:58   Log-Likelihood:                -477.84
 No. Observations:                 130   AIC:                             961.7
 Df Residuals:                     127   BIC:                             970.3
 Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
+Covariance Type:                  HAC                                         
 ========================================================================================
-                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+                           coef    std err          z      P&gt;|z|      [0.025      0.975]
 ----------------------------------------------------------------------------------------
-Intercept                2.1522      1.231      1.748      0.083      -0.284       4.589
-excess_crypto_market     4.9902     11.714      0.426      0.671     -18.189      28.170
-single_smb_factor       -0.0831      0.061     -1.364      0.175      -0.204       0.038
+Intercept                2.1522      1.745      1.233      0.218      -1.269       5.573
+excess_crypto_market     4.9902     16.886      0.296      0.768     -28.106      38.087
+single_smb_factor       -0.0831      0.072     -1.162      0.245      -0.223       0.057
 ==============================================================================
 Omnibus:                       48.487   Durbin-Watson:                   1.755
 Prob(Omnibus):                  0.000   Jarque-Bera (JB):              338.992
@@ -486,23 +485,23 @@ Kurtosis:                      10.635   Cond. No.                         193.
 ==============================================================================
 
 Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[1] Standard Errors are heteroscedasticity and autocorrelation robust (HAC) using 4 lags and without small sample correction
 </pre>
 </div>
 </li>
 </ol>
 </div>
-<div id="outline-container-org5b83561" class="outline-4">
-<h4 id="org5b83561"><span class="section-number-4">2.1.2.</span> Joint Test</h4>
+<div id="outline-container-org1de068e" class="outline-4">
+<h4 id="org1de068e"><span class="section-number-4">2.1.2.</span> Joint Test</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<pre class="example" id="org34d31da">
+<pre class="example" id="org09e2dfa">
                       TradedFactorModel Estimation Summary                      
 ================================================================================
 No. Test Portfolios:                  2   R-squared:                      0.0154
 No. Factors:                          2   J-statistic:                    1.6169
 No. Observations:                   130   P-value                         0.4456
 Date:                  Mon, Jan 19 2026   Distribution:                  chi2(2)
-Time:                          18:16:24                                         
+Time:                          19:11:58                                         
 Cov. Estimator:                  kernel                                         
                                                                                 
                                  Risk Premia Estimates                                  
@@ -519,22 +518,8 @@ See full_summary for complete results
 </pre>
 
 <p>
-See the results above, estimated via the <code>Traded Factor Model</code> method from the <code>LinearModels</code> python package.  The J-Statistic (<code>1.62</code>) is a test of whether the alpha coefficients are jointly equal to 0 (the null hypothesis). We do not reject the null with the statistics p-value of <code>0.45</code>.  
+See the results above, estimated via the <code>Traded Factor Model</code> method from the <code>LinearModels</code> python package.  The J-Statistic (<code>1.62</code>) is a test of whether the alpha coefficients are jointly equal to 0 (the null hypothesis). We do not reject the null with the statistics p-value of <code>0.45</code>.
 </p>
-</div>
-</div>
-<div id="outline-container-org9f65e64" class="outline-4">
-<h4 id="org9f65e64"><span class="section-number-4">2.1.3.</span> Annualized Alpha Coefficients</h4>
-<div class="outline-text-4" id="text-2-1-3">
-<p>
-The SMB and HML portfolios generate an alpha of <code>67.60000000000001</code> %, and <code>111.8</code> %, respectively.
-</p>
-
-<pre class="example">
-multi_SMB     67.52
-multi_HML    111.92
-Name: alpha, dtype: float64
-</pre>
 </div>
 </div>
 </div>
@@ -564,7 +549,7 @@ Hansen, Lars Peter (1982), "Large Sample Properties of Generalized Method of Mom
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida</p>
-<p class="date">Created: 2026-01-19 Mon 18:16</p>
+<p class="date">Created: 2026-01-19 Mon 19:11</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
